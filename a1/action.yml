@@ -1,0 +1,15 @@
+name: 'a1'
+description: 'a1'
+runs:
+  using: "composite"
+  steps:
+    - shell: sh
+      run:
+        echo a1
+    - shell: sh
+      run: |
+        . "${{ github.action_path }}/../.action"
+        if ! [ -d "${action_repo}" ]; then
+          ln -sfn "${{ github.action_path }}/.." "${action_repo}"
+        fi
+    - uses: ./ci-test2/a2
